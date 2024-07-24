@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     // Define an array of teams
+var teams = ["Team A", "Team B", "Team C", "Team D", "Team E", "Team F", "Team G", "Team H"];
+
+// Function to generate random indices
+function generateRandomIndex(max) {
+  return Math.floor(Math.random() * max);
+}
+
+// Function to generate IPL bracket
+function generateIPLBracket(teams) {
+  var bracket = [];
+
+  // Shuffle the teams array to randomize the order
+  for (var i = teams.length - 1; i > 0; i--) {
+    var j = generateRandomIndex(i + 1);
+    [teams[i], teams[j]] = [teams[j], teams[i]];
+  }
+
+  // Check if number of teams is a power of 2
+  if (!Number.isInteger(Math.log2(teams.length))) {
+    throw new Error("Number of teams must be a power of 2.");
+  }
+
+  // Generate the bracket
+  for (var i = 0; i < teams.length / 2; i++) {
+    var match = [teams[i], teams[teams.length - 1 - i]];
+    bracket.push(match);
+  }
+
+  return bracket;
+}
+
+// Generate the IPL bracket
+var iplBracket = generateIPLBracket(teams);
+
+// Print the IPL bracket
+console.log("IPL Bracket:");
+for (var i = 0; i < iplBracket.length; i++) {
+  console.log(`Match ${i + 1}: ${iplBracket[i][0]} vs ${iplBracket[i][1]}`);
+}
+
+
+    </script>
+    
+</body>
+</html>
